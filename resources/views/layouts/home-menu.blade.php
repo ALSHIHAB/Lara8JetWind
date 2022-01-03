@@ -25,8 +25,50 @@
         </div>
         <div class="flex-col items-end hidden space-y-1 md:flex">
             <div class="flex pt-2 space-x-1">
-                <button class="p-1 border hover:text-white active:text-white focus:text-white">AR</button>
-                <button class="p-1 border hover:text-white active:text-white focus:text-white">EN</button>
+                @foreach (config('app.languages') as $locale)
+                    <a href="{{ route('setlanguage', $locale) }}"
+                        class=" {{ app()->getLocale() == $locale ? ' border' : '' }} p-1 m-1 rounded-md hover:text-white active:text-white focus:text-white">
+                        @if ($locale == 'ar')
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 512 512">
+                                <mask id="a">
+                                    <circle cx="256" cy="256" r="256" fill="#fff" />
+                                </mask>
+                                <g mask="url(#a)">
+                                    <path fill="#eee" d="m0 167 253.8-19.3L512 167v178l-254.9 32.3L0 345z" />
+                                    <path fill="#d80027" d="M0 0h512v167H0z" />
+                                    <path fill="#333" d="M0 345h512v167H0z" />
+                                </g>
+                            </svg>
+                        @elseif ($locale == 'zh')
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 512 512">
+                                <mask id="a">
+                                    <circle cx="256" cy="256" r="256" fill="#fff" />
+                                </mask>
+                                <g mask="url(#a)">
+                                    <path fill="#d80027" d="M0 0h512v512H0z" />
+                                    <path fill="#ffda44"
+                                        d="m140.1 155.8 22.1 68h71.5l-57.8 42.1 22.1 68-57.9-42-57.9 42 22.2-68-57.9-42.1H118zm163.4 240.7-16.9-20.8-25 9.7 14.5-22.5-16.9-20.9 25.9 6.9 14.6-22.5 1.4 26.8 26 6.9-25.1 9.6zm33.6-61 8-25.6-21.9-15.5 26.8-.4 7.9-25.6 8.7 25.4 26.8-.3-21.5 16 8.6 25.4-21.9-15.5zm45.3-147.6L370.6 212l19.2 18.7-26.5-3.8-11.8 24-4.6-26.4-26.6-3.8 23.8-12.5-4.6-26.5 19.2 18.7zm-78.2-73-2 26.7 24.9 10.1-26.1 6.4-1.9 26.8-14.1-22.8-26.1 6.4 17.3-20.5-14.2-22.7 24.9 10.1z" />
+                                </g>
+                            </svg>
+                        @elseif($locale=='en')
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 512 512">
+                                <mask id="a">
+                                    <circle cx="256" cy="256" r="256" fill="#fff" />
+                                </mask>
+                                <g mask="url(#a)">
+                                    <path fill="#eee"
+                                        d="M0 256 256 0h256v55.7l-20.7 34.5 20.7 32.2v66.8l-21.2 32.7L512 256v66.8l-24 31.7 24 35.1v66.7l-259.1 28.3L0 456.3v-66.7l27.1-33.3L0 322.8z" />
+                                    <path fill="#d80027"
+                                        d="M256 256h256v-66.8H236.9zm-19.1-133.6H512V55.7H236.9zM512 512v-55.7H0V512zM0 389.6h512v-66.8H0z" />
+                                    <path fill="#0052b4" d="M0 0h256v256H0z" />
+                                    <path fill="#eee"
+                                        d="M15 14.5 6.9 40H-20L1.7 55.8l-8.3 25.5L15 65.5l21.6 15.8-8.2-25.4L50.2 40H23.4zm91.8 0L98.5 40H71.7l21.7 15.8-8.3 25.5 21.7-15.8 21.7 15.8-8.3-25.4L142 40h-26.8zm91.9 0-8.3 25.6h-26.8l21.7 15.8-8.3 25.5 21.7-15.8 21.6 15.7-8.2-25.3 21.7-16H207zM15 89.2l-8.3 25.5H-20l21.7 15.8-8.3 25.5L15 140l21.6 15.7-8.2-25.3 21.7-16H23.4zm91.8 0-8.3 25.5H71.8l21.7 15.8-8.3 25.5 21.7-15.8 21.6 15.7-8.2-25.3 21.7-16h-26.8zm91.8 0-8.3 25.5h-26.8l21.7 15.8-8.3 25.5 21.7-15.8 21.6 15.7-8.2-25.3 21.7-16H207zM15 163.6l-8.3 25.5H-20L1.6 205l-8.3 25.5L15 214.6l21.7 15.8-8.3-25.4 21.7-15.9H23.3zm91.8 0-8.3 25.5H71.7L93.4 205l-8.3 25.5 21.7-15.8 21.7 15.8-8.3-25.4 21.7-15.9h-26.8zm91.8 0-8.3 25.5h-26.8l21.7 15.8-8.3 25.5 21.7-15.8 21.7 15.8L212 205l21.7-15.9H207z" />
+                                </g>
+                            </svg>
+                        @endif
+                        {{-- {{ strtoupper($locale) }} --}}
+                    </a>
+                @endforeach
             </div>
             <div class="flex items-center justify-end space-x-1">
                 <button
@@ -109,7 +151,7 @@
 
         <!-- Mobile Menu -->
         <div x-show="mobileMenu" x-on:click.away="mobileMenu = false"
-            class="absolute inset-x-0 top-0 p-2 transition origin-top-right transform md:hidden">
+            class="absolute inset-x-0 top-0 p-2 transition origin-top-right transform md:hidden" style="display:none">
             <div class="bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 divide-y-1 divide-gray-50">
                 <div class="px-4 pt-2 pb-4 bg-gray-50">
                     <div class="flex items-center justify-between">

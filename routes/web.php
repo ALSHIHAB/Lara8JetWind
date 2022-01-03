@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('setlanguage/{lang}', function ($lang) {
+    session()->put('language', $lang);
+    return redirect()->back();
+})->name('setlanguage');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
